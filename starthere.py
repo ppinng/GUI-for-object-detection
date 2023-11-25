@@ -85,12 +85,14 @@ while True:
                         color = (255, 0, 0)
                         thickness = 2
                         cv2.putText(frame, f"{class_list[cls]} Confidence: {confidence}", org, font, fontScale, color, thickness)
-                        out_image = frame.copy()
-                        imgbytes = cv2.imencode('.png',  out_image)[1].tobytes()
-                        window['image'].update(data=imgbytes)
+
+            # Convert the image to bytes for PySimpleGUI
+            imgbytes = cv2.imencode('.png', frame)[1].tobytes()
+            # Update the image element in the GUI
+            window['image'].update(data=imgbytes)
 
         else:
             video.release()
             run_model = False
-
 window.close()
+
